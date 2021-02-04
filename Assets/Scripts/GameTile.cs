@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameTile : MonoBehaviour
 {
@@ -72,7 +73,7 @@ public class GameTile : MonoBehaviour
         }
         neighbor.distance = distance + 1;
         neighbor.nextOnPath = this;
-        return neighbor;
+        return neighbor.content.Type != GameTileContentType.Wall ? neighbor : null;
     }
 
     public static void MakeEastWestNeighbors(GameTile east, GameTile west)
@@ -89,8 +90,9 @@ public class GameTile : MonoBehaviour
         south.north = north;
     }
 
-
-
-
+    public void HidePath()
+    {
+        arrow.gameObject.SetActive(false);
+    }
 
 }

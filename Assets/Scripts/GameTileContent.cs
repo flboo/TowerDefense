@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GameTileContent : MonoBehaviour
 {
+
     [SerializeField]
     private GameTileContentType type = default;
     public GameTileContentType Type => type;
-
     GameTileContentFactory originFactory;
 
     public GameTileContentFactory OriginFactory
@@ -24,5 +24,6 @@ public class GameTileContent : MonoBehaviour
     {
         OriginFactory.Reclaim(this);
     }
+
 
 }

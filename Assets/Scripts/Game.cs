@@ -24,6 +24,14 @@ public class Game : MonoBehaviour
         {
             HandleTouch();
         }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            HandleAlternativeTouch();
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            board.ShowPaths = !board.ShowPaths;
+        }
     }
 
     void HandleTouch()
@@ -31,8 +39,17 @@ public class Game : MonoBehaviour
         GameTile tile = board.GetTile(TouchRay);
         if (tile != null)
         {
-            // tile.Content = tileContentFactory.Get(GameTileContentType.Destination);
+            board.ToggleWall(tile);
+        }
+    }
+
+    void HandleAlternativeTouch()
+    {
+        GameTile tile = board.GetTile(TouchRay);
+        if (tile != null)
+        {
             board.ToggleDestination(tile);
+
         }
     }
 

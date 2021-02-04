@@ -2,4 +2,5 @@
 {
     Empty,
     Destination,
+    Wall,
 }

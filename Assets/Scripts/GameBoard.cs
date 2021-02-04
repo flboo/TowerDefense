@@ -10,10 +10,46 @@ public class GameBoard : MonoBehaviour
     private Transform ground = default;
     [SerializeField]
     private GameTile tilePrefab = default;
+    [SerializeField]
+    private Texture2D gridTextture = default;
     Vector2Int size;
     GameTile[] tiles;
     Queue<GameTile> searchFrontier = new Queue<GameTile>();
     GameTileContentFactory contentFactory;
+    bool showPaths = false, showGrid = false;
+
+    public bool ShowPaths
+    {
+        get => showPaths;
+        set
+        {
+            showPaths = value;
+            if (showPaths)
+            {
+                foreach (GameTile tile in tiles)
+                {
+                    tile.ShowPath();
+                }
+            }
+            else
+            {
+                foreach (GameTile tile in tiles)
+                {
+                    tile.HidePath();
+                }
+            }
+
+        }
+    }
+
+    public void ShowGrid()
+    {
+        get => showGrid;
+        set
+        {
+            showGrid = value;
+        }
+    }
 
     public void Initialize(Vector2Int size, GameTileContentFactory content)
     {
@@ -60,7 +96,29 @@ public class GameBoard : MonoBehaviour
         else
         {
             tile.Content = contentFactory.Get(GameTileContentType.Destination);
+            if (!FindPaths())
+            {
+                tile.Content = contentFactory.Get(GameTileContentType.Empty);
+                FindPaths();
+            }
+        }
+    }
+
+    public void ToggleWall(GameTile tile)
+    {
+        if (tile.Content.Type == GameTileContentType.Wall)
+        {
+            tile.Content = contentFactory.Get(GameTileContentType.Empty);
             FindPaths();
+        }
+        else if (tile.Content.Type == GameTileContentType.Empty)
+        {
+            tile.Content = contentFactory.Get(GameTileContentType.Wall);
+            if (!FindPaths())
+            {
+                tile.Content = contentFactory.Get(GameTileContentType.Empty);
+                FindPaths();
+            }
         }
     }
 
@@ -103,9 +161,19 @@ public class GameBoard : MonoBehaviour
                 }
             }
         }
-        foreach (var tile in tiles)
+        foreach (GameTile tile in tiles)
         {
-            tile.ShowPath();
+            if (!tile.HasPath)
+            {
+                return false;
+            }
+        }
+        if (showPaths)
+        {
+            foreach (GameTile tile in tiles)
+            {
+                tile.ShowPath();
+            }
         }
         return true;
     }

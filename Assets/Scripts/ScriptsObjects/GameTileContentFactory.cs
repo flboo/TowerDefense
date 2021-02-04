@@ -10,6 +10,8 @@ public class GameTileContentFactory : ScriptableObject
     private GameTileContent destinationPrefab = default;
     [SerializeField]
     private GameTileContent emptyPrefab = default;
+    [SerializeField]
+    private GameTileContent wallPrefab = default;
 
     public void Reclaim(GameTileContent content)
     {
@@ -25,6 +27,8 @@ public class GameTileContentFactory : ScriptableObject
                 return Get(destinationPrefab);
             case GameTileContentType.Empty:
                 return Get(emptyPrefab);
+            case GameTileContentType.Wall:
+                return Get(wallPrefab);
         }
         Debug.Assert(false, "un support type");
         return null;
@@ -57,8 +61,5 @@ public class GameTileContentFactory : ScriptableObject
         }
         SceneManager.MoveGameObjectToScene(o, contentScene);
     }
-
-
-
 
 }
