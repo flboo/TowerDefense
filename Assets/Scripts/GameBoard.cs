@@ -17,9 +17,10 @@ public class GameBoard : MonoBehaviour
     Vector2Int size;
     GameTile[] tiles;
     Queue<GameTile> searchFrontier = new Queue<GameTile>();
+    List<GameTile> spawnPoint = new List<GameTile>();
     GameTileContentFactory contentFactory;
     bool showPaths = false, showGrid = false;
-
+    public int SpawnPointCount => spawnPoint.Count;
     public bool ShowPaths
     {
         get => showPaths;
@@ -54,6 +55,7 @@ public class GameBoard : MonoBehaviour
             if (showGrid)
             {
                 m.mainTexture = gridTextture;
+                m.SetTextureScale("_MainTex", size);
             }
             else
             {
@@ -93,8 +95,13 @@ public class GameBoard : MonoBehaviour
                 tile.Content = contentFactory.Get(GameTileContentType.Empty);
             }
         }
-        // FindPaths();
         ToggleDestination(tiles[tiles.Length / 2]);
+        ToggleSpawnPoint(tiles[0]);
+    }
+
+    public GameTile GetSpwanPoint(int index)
+    {
+        return spawnPoint[index];
     }
 
     public void ToggleDestination(GameTile tile)
@@ -112,6 +119,23 @@ public class GameBoard : MonoBehaviour
                 tile.Content = contentFactory.Get(GameTileContentType.Empty);
                 FindPaths();
             }
+        }
+    }
+
+    public void ToggleSpawnPoint(GameTile tile)
+    {
+        if (tile.Content.Type == GameTileContentType.SpawnPoint)
+        {
+            if (spawnPoint.Count > 1)
+            {
+                spawnPoint.Remove(tile);
+            }
+            tile.Content = contentFactory.Get(GameTileContentType.Empty);
+        }
+        else if (tile.Content.Type == GameTileContentType.Empty)
+        {
+            spawnPoint.Add(tile);
+            tile.Content = contentFactory.Get(GameTileContentType.SpawnPoint);
         }
     }
 

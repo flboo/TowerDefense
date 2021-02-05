@@ -15,7 +15,6 @@ public class TestCode : MonoBehaviour
 
     }
 
-
     void TestCode1()
     {
         // Logger(0 & 1);

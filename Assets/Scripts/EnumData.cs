@@ -3,4 +3,5 @@
     Empty,
     Destination,
     Wall,
+    SpawnPoint,
 }
