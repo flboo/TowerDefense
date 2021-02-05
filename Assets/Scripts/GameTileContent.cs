@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class GameTileContent : MonoBehaviour
 {
 
@@ -9,6 +9,7 @@ public class GameTileContent : MonoBehaviour
     private GameTileContentType type = default;
     public GameTileContentType Type => type;
     GameTileContentFactory originFactory;
+
 
     public GameTileContentFactory OriginFactory
     {

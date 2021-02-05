@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
 using System.Text.RegularExpressions;
+
 public class GameBoard : MonoBehaviour
 {
     [SerializeField]
     private Transform ground = default;
+
     [SerializeField]
     private GameTile tilePrefab = default;
     [SerializeField]
@@ -42,12 +44,21 @@ public class GameBoard : MonoBehaviour
         }
     }
 
-    public void ShowGrid()
+    public bool ShowGrid
     {
         get => showGrid;
         set
         {
             showGrid = value;
+            Material m = this.ground.GetComponent<MeshRenderer>().material;
+            if (showGrid)
+            {
+                m.mainTexture = gridTextture;
+            }
+            else
+            {
+                m.mainTexture = null;
+            }
         }
     }
 

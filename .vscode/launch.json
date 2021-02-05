@@ -7,7 +7,7 @@
         {
             "name": "Unity Editor",
             "type": "unity",
-            "path": "/Users/fuli.wang/UnityProject/Demo/Unity塔防游戏/Library/EditorInstance.json",
+            "path": "/Users/fuli.wang/UnityProject/Demo/TowerDefense/Library/EditorInstance.json",
             "request": "launch"
         },
         {
