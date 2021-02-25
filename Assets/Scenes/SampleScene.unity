@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066c0085aebf046f8bbd1acd40eaeea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardSize: {x: 15, y: 15}
+  boardSize: {x: 11, y: 11}
   board: {fileID: 189789375}
   enemyFactory: {fileID: 11400000, guid: 7274e2603825c46218a0481fa6b4a67c, type: 2}
   spawnSpeed: 1
