@@ -8,20 +8,23 @@ public class GameTile : MonoBehaviour
     [SerializeField]
     private Transform arrow = default;
     GameTile north, east, south, west, nextOnPath;
-    private static
     Quaternion northRotation = Quaternion.Euler(90, 0, 0);
     Quaternion eastRotation = Quaternion.Euler(90, 90, 0);
     Quaternion southRotation = Quaternion.Euler(90, 180, 0);
     Quaternion westRotation = Quaternion.Euler(90, 270, 0);
     public bool HasPath => distance != int.MaxValue;
     int distance;
-    public GameTile GrowPathNorth() => GrowPathTo(north);
-    public GameTile GrowPathSouth() => GrowPathTo(south);
-    public GameTile GrowPathEast() => GrowPathTo(east);
-    public GameTile GrowPathWest() => GrowPathTo(west);
+    public GameTile GrowPathNorth() => GrowPathTo(north, Direction.South);
+    public GameTile GrowPathSouth() => GrowPathTo(south, Direction.North);
+    public GameTile GrowPathEast() => GrowPathTo(east, Direction.West);
+    public GameTile GrowPathWest() => GrowPathTo(west, Direction.East);
     GameTileContent content;
 
     public bool Isalternative { get; set; }
+    public GameTile NextTileOnPath => nextOnPath;
+    public Vector3 ExitPoint { get; private set; }
+    public Direction PathDirection { get; private set; }
+
 
     public GameTileContent Content
     {
@@ -37,6 +40,7 @@ public class GameTile : MonoBehaviour
             content.transform.localPosition = transform.localPosition;
         }
     }
+
     public void ClearPath()
     {
         distance = int.MaxValue;
@@ -47,6 +51,7 @@ public class GameTile : MonoBehaviour
     {
         distance = 0;
         nextOnPath = null;
+        ExitPoint = transform.localPosition;
     }
 
     public void ShowPath()
@@ -64,7 +69,7 @@ public class GameTile : MonoBehaviour
         westRotation;
     }
 
-    private GameTile GrowPathTo(GameTile neighbor)
+    private GameTile GrowPathTo(GameTile neighbor, Direction direction)
     {
         Debug.Assert(HasPath, "no path");
         if (!HasPath || neighbor == null || neighbor.HasPath)
@@ -73,6 +78,8 @@ public class GameTile : MonoBehaviour
         }
         neighbor.distance = distance + 1;
         neighbor.nextOnPath = this;
+        neighbor.ExitPoint = neighbor.transform.localPosition + direction.GetHalfVector();
+        neighbor.PathDirection = direction;
         return neighbor.content.Type != GameTileContentType.Wall ? neighbor : null;
     }
 
@@ -94,5 +101,4 @@ public class GameTile : MonoBehaviour
     {
         arrow.gameObject.SetActive(false);
     }
-
 }

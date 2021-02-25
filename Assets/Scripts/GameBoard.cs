@@ -64,9 +64,9 @@ public class GameBoard : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector2Int size, GameTileContentFactory content)
+    public void Initialize(Vector2Int size, GameTileContentFactory contentFactory)
     {
-        contentFactory = content;
+        this.contentFactory = contentFactory;
         this.size = size;
         this.ground.localScale = new Vector3(size.x, size.y, 1f);
 
@@ -92,7 +92,7 @@ public class GameBoard : MonoBehaviour
                 {
                     tile.Isalternative = !tile.Isalternative;
                 }
-                tile.Content = contentFactory.Get(GameTileContentType.Empty);
+                tile.Content = this.contentFactory.Get(GameTileContentType.Empty);
             }
         }
         ToggleDestination(tiles[tiles.Length / 2]);
