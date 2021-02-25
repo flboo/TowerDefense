@@ -24,7 +24,7 @@ public class EnemyFactory : GameObjectFactory
 
     public void ReClanim(Enemy enemy)
     {
-        Debug.Assert(enemy == this, "wrong factory reclaim");
+        Debug.Assert(enemy.OriginFactory == this, "wrong factory reclaimd ! ");
         Destroy(enemy.gameObject);
     }
 

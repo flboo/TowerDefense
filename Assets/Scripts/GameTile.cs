@@ -80,7 +80,7 @@ public class GameTile : MonoBehaviour
         neighbor.nextOnPath = this;
         neighbor.ExitPoint = neighbor.transform.localPosition + direction.GetHalfVector();
         neighbor.PathDirection = direction;
-        return neighbor.content.Type != GameTileContentType.Wall ? neighbor : null;
+        return neighbor.content.BlockPath ? null : neighbor;
     }
 
     public static void MakeEastWestNeighbors(GameTile east, GameTile west)
