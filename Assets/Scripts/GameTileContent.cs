@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+
+[SelectionBase]
 public class GameTileContent : MonoBehaviour
 {
-
     [SerializeField]
     private GameTileContentType type = default;
     public GameTileContentType Type => type;
@@ -27,5 +28,9 @@ public class GameTileContent : MonoBehaviour
         OriginFactory.Reclaim(this);
     }
 
+    public virtual void GameUpdate()
+    {
+
+    }
 
 }

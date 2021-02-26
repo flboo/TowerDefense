@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     private Transform model = default;
     float pathOffset;
     float speed;
+    public float Scale { get; private set; }
     public EnemyFactory OriginFactory
     {
         get => originFactory;
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
 
     public void Initialize(float scale, float speed, float offset)
     {
+        Scale = scale;
         this.pathOffset = offset;
         this.speed = speed;
         model.localScale = new Vector3(scale, scale, scale);

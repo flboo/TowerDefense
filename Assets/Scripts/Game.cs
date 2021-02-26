@@ -52,6 +52,8 @@ public class Game : MonoBehaviour
         }
 
         eneies.GameUpdate();
+        Physics.SyncTransforms();
+        board.GameUpdate();
     }
 
 

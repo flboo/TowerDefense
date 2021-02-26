@@ -17,6 +17,7 @@ public class TargetPoint : MonoBehaviour
         Enemy = transform.root.GetComponent<Enemy>();
         Debug.Assert(Enemy != null, "Taret point without enemy root", this);
         Debug.Assert(GetComponent<SphereCollider>() != null, "Target point without sphere collider!", this);
+        Debug.Assert(gameObject.layer == 9, "Target point in wrong layer", this);
     }
 
 
