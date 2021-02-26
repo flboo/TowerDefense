@@ -20,5 +20,5 @@ MonoBehaviour:
     type: 3}
   spwawnPointPrefab: {fileID: 7168005779552718501, guid: 78ee750bc41334eb0b5385179892e717,
     type: 3}
-  towerPrefab: {fileID: 4935617028686712465, guid: c226dd1af14b241f38efcab22c920e54,
+  towerPrefab: {fileID: 4236106414508918297, guid: c226dd1af14b241f38efcab22c920e54,
     type: 3}

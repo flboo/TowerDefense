@@ -17,6 +17,9 @@ public class Enemy : MonoBehaviour
     float pathOffset;
     float speed;
     public float Scale { get; private set; }
+    private float Health { set; get; }
+
+
     public EnemyFactory OriginFactory
     {
         get => originFactory;
@@ -33,15 +36,25 @@ public class Enemy : MonoBehaviour
         this.pathOffset = offset;
         this.speed = speed;
         model.localScale = new Vector3(scale, scale, scale);
+        Health = 100 * Scale;
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        Debug.Assert(damage >= 0f, "nagative demage applied");
+        Health -= damage;
     }
 
     public bool GemeUpdate()
     {
+        if (Health <= 0)
+        {
+            originFactory.ReClanim(this);
+            return false;
+        }
         progress += Time.deltaTime * progressfactor;
         while (progress >= 1f)
         {
-            // tileFrom = tileTo;
-            // tileTo = tileTo.NextTileOnPath;
             if (tileTo == null)
             {
                 originFactory.ReClanim(this);

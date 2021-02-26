@@ -300,6 +300,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   targetingRange: 2.5
+  turrent: {fileID: 6005180387908613490}
+  laserBeam: {fileID: 6964479675896299412}
+  damagePerSecond: 20
 --- !u!1 &7525347966870759118
 GameObject:
   m_ObjectHideFlags: 0
