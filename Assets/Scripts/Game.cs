@@ -18,6 +18,7 @@ public class Game : MonoBehaviour
     Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
     float spawnProgress = 0;
     EnemyCollection eneies = new EnemyCollection();
+    TowerType selectTowerType;
 
     void Awake()
     {
@@ -72,7 +73,7 @@ public class Game : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                board.ToggleTower(tile);
+                board.ToggleTower(tile, selectTowerType);
             }
             else
                 board.ToggleWall(tile);

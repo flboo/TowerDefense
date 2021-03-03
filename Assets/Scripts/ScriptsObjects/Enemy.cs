@@ -52,6 +52,7 @@ public class Enemy : MonoBehaviour
             originFactory.ReClanim(this);
             return false;
         }
+
         progress += Time.deltaTime * progressfactor;
         while (progress >= 1f)
         {
