@@ -177,7 +177,7 @@ public class GameBoard : MonoBehaviour
                 tile.Content = contentFactory.Get(GameTileContentType.Empty);
                 FindPaths();
             }
-            else if (((Tower)tile.Content).TowerType != towerType)
+            else
             {
                 tile.Content = contentFactory.Get(towerType);
                 updatingContent.Add(tile.Content);

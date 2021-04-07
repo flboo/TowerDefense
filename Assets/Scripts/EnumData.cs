@@ -27,7 +27,8 @@ public enum DirectionChange
 
 public enum TowerType
 {
-    Laser, Mortar,
+    Laser,
+    Mortar,
 }
 
 public static class DirectionExtension
