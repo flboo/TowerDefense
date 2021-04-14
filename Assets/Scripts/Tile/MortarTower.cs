@@ -89,6 +89,8 @@ public class MortarTower : Tower
             1f
         );
 
+        mortar.localRotation = Quaternion.LookRotation(new Vector3(dir.x, tanTheta, dir.y));
+        Game.SpawnShell().Initialize(launchPoint, targetPoint, new Vector3(s * cosTheta * dir.x, s * sinTheta, s * cosTheta * dir.y));
 
     }
 

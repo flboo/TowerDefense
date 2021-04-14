@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    GameBehaviorCollection enemies = new GameBehaviorCollection();
+    GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
+    [SerializeField]
+    private WarFactory warFactory = default;
+
     [SerializeField]
     Vector2Int boardSize = new Vector2Int(11, 11);
 
@@ -19,6 +24,20 @@ public class Game : MonoBehaviour
     float spawnProgress = 0;
     EnemyCollection eneies = new EnemyCollection();
     TowerType selectTowerType = TowerType.Laser;
+
+    private static Game instance;
+
+    public static Shell SpawnShell()
+    {
+        Shell shell = instance.warFactory.Shell;
+        instance.nonEnemies.Add(shell);
+        return shell;
+    }
+
+    void OnEnable()
+    {
+        instance = this;
+    }
 
     void Awake()
     {
@@ -64,6 +83,7 @@ public class Game : MonoBehaviour
         eneies.GameUpdate();
         Physics.SyncTransforms();
         board.GameUpdate();
+        nonEnemies.GameUpdate();
     }
 
 

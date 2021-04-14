@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : GameBehavior
 {
 
     EnemyFactory originFactory;
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
         Health -= damage;
     }
 
-    public bool GemeUpdate()
+    public override bool GameUpdate()
     {
         if (Health <= 0)
         {
