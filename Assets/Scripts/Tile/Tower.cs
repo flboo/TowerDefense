@@ -5,11 +5,11 @@ using UnityEngine;
 public abstract class Tower : GameTileContent
 {
     const int enemyLayerMask = 1 << 9;
-    static Collider[] targetBuffer = new Collider[100];
-
+    static Collider[] targetsBuffer = new Collider[100];
     [SerializeField, Range(1.5f, 10.5f)]
     protected float targetingRange = 1.5f;
     public abstract TowerType TowerType { get; }
+
 
     void OnDrawGizmosSelected()
     {
@@ -44,16 +44,10 @@ public abstract class Tower : GameTileContent
 
     protected bool AcquireTarget(out TargetPoint target)
     {
-        Vector3 a = transform.localPosition;
-        Vector3 b = a;
-        b.y += 2f;
-
-        int hits = Physics.OverlapCapsuleNonAlloc(a, b, targetingRange, targetBuffer, enemyLayerMask);
-
-        if (hits > 0)
+        if (TargetPoint.FillBuffer(transform.localPosition, targetingRange))
         {
-            target = targetBuffer[Random.Range(0, hits)].GetComponent<TargetPoint>();
-            Debug.Assert(target != null, "targeted non-enemy !", targetBuffer[0]);
+            target = TargetPoint.RandomBuffered;
+            Debug.Assert(target != null, "targeted non-enemy !", targetsBuffer[0]);
             return true;
         }
         target = null;

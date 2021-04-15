@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shellPrefab: {fileID: -5643247145163455361, guid: c92aeb8780d4f4cbe9b5e8a19a3fe5f5,
     type: 3}
+  explosionPrefan: {fileID: 7584037029018369695, guid: e352089507cfb434983aab8bf1ffa749,
+    type: 3}
